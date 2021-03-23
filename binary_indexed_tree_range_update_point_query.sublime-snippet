@@ -1,0 +1,37 @@
+<snippet>
+    <content><![CDATA[
+class FenwickTree { // Strictly 1-based indexing throughout
+    vi ft;
+    
+public:    
+    FenwickTree(int n) {
+        ft.assign(n + 1, 0);
+    }
+
+    void add(int k, ll v) { // add freq. v to pos k
+        while (k < ft.size()) {
+            ft[k] += v;
+            k += k & (-k);
+        }
+    }
+
+    void range_add(int l, int r, int val) {
+        if (l > r || l < 0)  return;
+        add(l, val);
+        if (r + 1 < int(ft.size())) add(r + 1, -val);
+    }
+
+    int point_query(int idx) {
+        int ret = 0;
+        for (; idx > 0; idx -= idx & -idx)
+            ret += ft[idx];
+        return ret;
+    }
+};
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>Fenwick_Tree RUPQ</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.c++</scope>
+</snippet>

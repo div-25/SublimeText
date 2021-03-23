@@ -1,0 +1,139 @@
+<snippet>
+    <content><![CDATA[
+#include "bits/stdc++.h"
+using namespace std;
+
+/* DEBUG CODE BEGINS ========= */
+template <typename A, typename B>
+string to_string(pair<A, B> p);
+ 
+template <typename A, typename B, typename C>
+string to_string(tuple<A, B, C> p);
+ 
+template <typename A, typename B, typename C, typename D>
+string to_string(tuple<A, B, C, D> p);
+ 
+string to_string(const string& s) {
+    return '"' + s + '"';
+}
+ 
+string to_string(const char* s) {
+    return to_string((string) s);
+}
+ 
+string to_string(bool b) {
+    return (b ? "true" : "false");
+}
+ 
+string to_string(vector<bool> v) {
+    bool first = true;
+    string res = "{";
+    for (int i = 0; i < static_cast<int>(v.size()); i++) {
+        if (!first) {
+            res += ", ";
+        }
+        first = false;
+        res += to_string(v[i]);
+    }
+    res += "}";
+    return res;
+}
+ 
+template <size_t N>
+string to_string(bitset<N> v) {
+    string res = "";
+    for (size_t i = 0; i < N; i++) {
+        res += static_cast<char>('0' + v[i]);
+    }
+return res;
+}
+ 
+template <typename A>
+string to_string(A v) {
+  bool first = true;
+  string res = "{";
+  for (const auto &x : v) {
+    if (!first) {
+      res += ", ";
+    }
+    first = false;
+    res += to_string(x);
+  }
+  res += "}";
+  return res;
+}
+ 
+template <typename A, typename B>
+string to_string(pair<A, B> p) {
+    return "(" + to_string(p.first) + ", " + to_string(p.second) + ")";
+}
+ 
+template <typename A, typename B, typename C>
+string to_string(tuple<A, B, C> p) {
+    return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ")";
+}
+ 
+template <typename A, typename B, typename C, typename D>
+string to_string(tuple<A, B, C, D> p) {
+    return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ", " + to_string(get<3>(p)) + ")";
+}
+ 
+void debug_out() { cerr << endl; }
+ 
+template <typename Head, typename... Tail>
+void debug_out(Head H, Tail... T) {
+    cerr << " " << to_string(H);
+    debug_out(T...);
+}
+ 
+#ifdef DIV_DEBUG
+#define debug(...) cerr << "[" << #__VA_ARGS__ << "]:", debug_out(__VA_ARGS__)
+#else
+#define debug(...) 42
+#endif
+
+#ifdef DIV_DEBUG
+#define cerr(...) __cerr(#__VA_ARGS__, __VA_ARGS__)
+template <typename Arg1>
+void __cerr(const char *name, Arg1 &&arg1) {
+    cerr << name << " = " << arg1 << endl;
+}
+template <typename Arg1, typename... Args>
+void __cerr(const char *names, Arg1 &&arg1, Args&&... args) {
+    const char *sep = strchr(names + 1, ',');
+    cerr.write(names, sep - names) << " = " << arg1 << " |";
+    __cerr(sep + 1, args...);
+}
+#else
+#define cerr(...) 
+#endif
+/* DEBUG CODE ENDS ========= */
+
+typedef long long ll;
+typedef long double ld;
+typedef vector<ll> vi;
+typedef pair<ll, ll> pii;
+typedef vector<pii> vii;
+typedef vector<vi> vvi;
+const int MOD = 1e9 + 7;
+
+#define fastIO \
+ios_base::sync_with_stdio(false); cin.tie(nullptr);
+#define endl '\n'
+#define pb push_back
+#define ff first
+#define ss second
+#define mp make_pair 
+
+int main() {
+    fastIO;
+    $0
+    return 0;
+}
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>compi</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.c++</scope>
+</snippet>

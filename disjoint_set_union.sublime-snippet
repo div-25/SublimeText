@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[
+vector<int> par;
+void init_dsu(int n) { par.clear(); par.resize(n, -1); }
+int root(int x) { return par[x] < 0 ? x : par[x] = root(par[x]); }
+void Union(int x, int y) {
+    if ((x = root(x)) == (y = root(y)))  return;
+    if (par[y] < par[x])   swap(x,y);
+    par[x] += par[y];
+    par[y] = x;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>disjoint_set_union</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

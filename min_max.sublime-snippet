@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+template<typename T>
+T minm(T x) { return x; }
+template <typename T, typename... Args>
+T minm(T a, Args... args) { return min(a, minm(args...)); }
+template<typename T>
+T maxm(T x) { return x; }
+template <typename T, typename... Args>
+T maxm(T a, Args... args) { return max(a, maxm(args...)); }
+
+template<typename T1, typename T2>
+bool maximize(T1 &a, const T2 &b) {
+    if (a < b) {
+        a = b;
+        return true;
+    }
+
+    return false;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>min_max</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,67 @@
+<snippet>
+	<content><![CDATA[
+class SegmentTree {    // Replace ** with appropriate function
+    int n;
+    vii st;
+    vi A;
+    const ll INF = ll(1e18) + 42;
+    pii combine(pii a, pii b) {    // **
+        if (a.ss == -1b) return b;
+        if (b.ss == -1) return a;
+        if (a.ff >= b.ff)   return a;
+        return b;
+    }
+    
+    void build(int v, int L, int R) {
+        if (L == R) st[v] = {A[L], L};   // Storing the value
+        else {
+            int mid = (L + R) / 2;
+            build(v << 1, L, mid);
+            build((v << 1) + 1, mid + 1, R);
+            st[v] = combine(st[v << 1], st[(v << 1) + 1]);
+        }
+    }
+
+    pii query(int v, int L, int R, int i, int j) {
+        if (i > R || j < L) return {-INF, -1};    // ** -INF for max; 0 for sum; INF for min
+        if (i <= L && R <= j) return st[v];
+        int mid = (L + R) / 2;
+        return combine(query(v << 1, L, mid, i, j),
+                query((v << 1) + 1, mid + 1, R, i, j));
+    }
+
+    void update(int v, int L, int R, int pos, ll val) {
+        if (L == R) {   // **
+            A[pos] = val;    
+            st[v] = {val, L};
+        }
+        else {
+            int mid = (L + R) / 2;
+            if (L <= pos && pos <= mid) 
+                update(v << 1, L, mid, pos, val);
+            else
+                update((v << 1) + 1, mid + 1, R, pos, val);
+            st[v] = combine(st[v << 1], st[(v << 1) + 1]);
+        }
+    }
+
+public:
+    SegmentTree(const vi& _A) {
+        A = _A;
+        n = A.size();
+        st.assign(4 * n, {-INF, -1});
+        build(1, 0, n - 1);
+    }
+    
+    pii query(int i, int j) { return query(1, 0, n - 1, i, j); }
+
+    void update(int pos, ll val) { return update(1, 0, n - 1, pos, val); }
+      
+};
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>Segment_Tree_Max</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

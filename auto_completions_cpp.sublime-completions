@@ -1,0 +1,26 @@
+{
+    "scope": "source.c, source.cpp, source.c++",
+    "completions":
+    [
+        {
+            "trigger": "vt\tvector<T>", 
+            "contents": "vector<${1:bool}>$2",
+        },
+        {
+            "trigger": "ptt\tpair<T1, T2>", 
+            "contents": "pair<${1:ll}, ${2:ll}>$3",
+        },
+        {
+            "trigger": "vtt\tvector<pair<T1, T2>>", 
+            "contents": "vector<pair<${1:ll}, ${2:ll}>>$3",
+        },
+        {
+            "trigger": "vvt\tvector<vector<T>>", 
+            "contents": "vector<vector<${1:bool}>>$2",
+        },
+        {
+            "trigger": "mtt\tmap<T1, T2>", 
+            "contents": "map<${1:ll}, ${2:ll}>$3",
+        },
+    ]
+}

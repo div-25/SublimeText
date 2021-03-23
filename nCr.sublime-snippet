@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+/*  Call init_fact() in MAIN
+    Check _fSZ
+    Use "power" function
+*/$0
+const int _fSZ = 2e5 + 5;
+ll fact[_fSZ];
+
+void init_fact() {
+    fact[0] = 1;
+    for (int i = 1; i < _fSZ; ++i)
+        fact[i] = (i * fact[i - 1]) % MOD;
+}
+
+ll modInverse(ll n)	{ ll res = power(n, MOD - 2); return res; } //only if MOD is prime
+
+ll C(ll n, ll r) {
+    if (r == 0)    return 1ll;
+    return (fact[n] * modInverse((fact[r] * fact[n - r]) % MOD)) % MOD;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ncr</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

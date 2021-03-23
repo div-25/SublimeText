@@ -1,0 +1,48 @@
+<snippet>
+	<content><![CDATA[
+#include "bits/stdc++.h"
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+typedef vector<ll> vi;
+typedef pair<ll, ll> pii;
+typedef vector<pii> vii;
+typedef vector<vi> vvi;
+const int MOD = 1e9 + 7;
+
+#define fastIO \
+ios_base::sync_with_stdio(false); cin.tie(nullptr);
+#define endl '\n'
+#define pb push_back
+#define ff first
+#define ss second
+#define mp make_pair 
+
+vvi adj;
+
+void init(int n) {
+	adj.clear(), adj.resize(n);
+}
+
+int main() {
+    fastIO;
+    int n;
+    cin >> n;
+    init(n);
+    for (int i = 0; i < n - 1; i++) {
+    	int u, v;
+    	cin >> u >> v;
+    	adj[--u].pb(--v);
+    	adj[v].pb(u);
+    }
+    $0
+    return 0;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>graph</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

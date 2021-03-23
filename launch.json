@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C++ Compiler",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "C:\MinGW\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true
+        },
+    ]
+}

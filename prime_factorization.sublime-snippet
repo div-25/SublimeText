@@ -1,0 +1,23 @@
+<snippet>
+    <content><![CDATA[
+vii primeFactorize(ll n) {  // (prime, exponent) pairs
+    vii v;
+    for (ll i = 2; i * i <= n; i++) {
+        int cnt = 0;
+        while (n % i == 0) {
+            cnt++;
+            n /= i;
+        }
+        if (cnt)    v.pb(mp(i, cnt));
+    }
+    if (n > 1)  v.pb(mp(n, 1));
+    
+    return v;
+}
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>primeFactorize</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.c++</scope>
+</snippet>

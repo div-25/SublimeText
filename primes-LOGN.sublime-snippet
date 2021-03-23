@@ -1,0 +1,40 @@
+<snippet>
+    <content><![CDATA[
+ll _sieve_size;
+vector<int> bs;   // 10^7 should be enough for most cases
+vi primes;   // compact list of primes in form of vector<int>
+
+void sieve(ll upperbound) {
+    _sieve_size = upperbound + 1;
+    bs.resize(_sieve_size); // Contains SPF
+    iota(bs.begin(), bs.end(), 0);
+    for (ll i = 2; i < _sieve_size; i++) if (bs[i] == i) {
+        for (ll j = i * i; j < _sieve_size; j += i) 
+            if (bs[j] == j) bs[j] = i;
+        primes.push_back((int)i); 
+    }
+} 
+
+bool isPrime(ll N) {
+    if (N < _sieve_size)   return bs[N];
+    for (int i = 0; i < (int)primes.size(); i++)
+        if (N % primes[i] == 0) return false;
+    return true;
+}             // note: only works for N <= (last prime in vi "primes")^2        
+
+vi primeFactors(ll N) {    //SAVES MULTIPLE COPIES - O(log N)
+    vi factors;
+    while (bs[N] != N) {
+        factors.push_back(bs[N]);
+        N /= bs[N];
+    }
+    if (N > 1)  factors.push_back(N);
+    return factors;
+}
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>primes_LOGN</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.c++</scope>
+</snippet>

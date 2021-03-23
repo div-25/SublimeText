@@ -1,0 +1,59 @@
+<snippet>
+	<content><![CDATA[
+class LCA {
+    int n, l;
+    int timer;
+    vi tin, tout;
+    vvi up;
+
+    void dfs(int v, int par, vvi& adj) {
+        tin[v] = timer++;
+        up[v][0] = par;
+        for (int i = 1; i <= l; i++) {
+            up[v][i] = up[up[v][i - 1]][i - 1];
+        }
+        for (auto u : adj[v]) {
+            if (u != par) {
+                dfs(u, v, adj);
+            }
+        }
+        tout[v] = timer++;
+    }
+
+public:
+    LCA(vvi& adj, int root = 0) {
+        n = adj.size();
+        tin.resize(n);
+        tout.resize(n);
+        timer = 0;
+        l = ceil(log2(n));
+        up.assign(n, vi(l + 1));
+        dfs(root, root, adj);
+    }
+
+    bool isAncestor(int u, int v) {
+        return tin[u] <= tin[v] && tout[v] <= tout[u];
+    }
+
+    int lca(int u, int v) {
+        assert(u >= 0 && u < n);
+        assert(v >= 0 && v < n);
+        if (isAncestor(u, v))
+            return u;
+        if (isAncestor(v, u))
+            return v;
+        for (int i = l; i >= 0; i--) {
+            if (!isAncestor(up[u][i], v)) {
+                u = up[u][i];
+            }
+        }
+        return up[u][0];
+    }
+};
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>LCA</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,64 @@
+<snippet>
+    <content><![CDATA[
+class SuffixArray {
+    string s;       // S[n - 1] == '\0'
+    int n, alphabet;
+    vector<int> p;  // Suffix-sorted array | p[i] = j <=> S[j .. n-1] is the i-th lexicographically smallest suffix
+
+public:
+    SuffixArray(string str) {
+        s = str + '\0';
+        n = int(s.length());
+        alphabet = 256;
+        
+        vector<int> cnt(max(alphabet, n));
+        for (auto i : s)    ++cnt[i];
+        for (int i = 1; i < alphabet; i++) cnt[i] += cnt[i - 1];
+        p.resize(n);
+        for (int i = 0; i < n; i++) p[--cnt[s[i]]] = i;
+        
+        vector<vector<int>> cls(2,  vector<int>(n));
+        int cur = 0;
+        int cnt_cls = 1;
+        for (int i = 1; i < n; i++) {
+            if (s[p[i]] != s[p[i - 1]]) ++cnt_cls;
+            cls[cur][p[i]] = cnt_cls - 1;
+        }
+        
+        vector<int> perm(n);
+        for (int len = 1; len < n; len <<= 1) {
+            int pre = cur;
+            cur ^= 1;
+            fill_n(cnt.begin(), cnt_cls, 0);
+            for (int i = 0; i < n; i++) {
+                perm[i] = (p[i] - len + n) % n;
+                ++cnt[cls[pre][i]];
+            }
+            for (int i = 1; i < cnt_cls; i++) {
+                cnt[i] += cnt[i - 1];
+            }
+            for (int i = n - 1; i >= 0; i--) {
+                p[--cnt[cls[pre][perm[i]]]] = perm[i];
+            }
+            cls[cur][p[0]] = 0;
+            cnt_cls = 1;
+            for (int i = 1; i < n; i++) {
+                if (cls[pre][p[i]] != cls[pre][p[i - 1]] ||
+                    cls[pre][(p[i] + len) % n] != cls[pre][(p[i - 1] + len) % n])
+                    ++cnt_cls;
+                cls[cur][p[i]] = cnt_cls - 1;
+            }
+        }
+    }
+
+    vector<int> getSuffixArray() {
+        return vector<int>(p.begin() + 1, p.end());
+    }
+};
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>suffix_array</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.c++</scope>
+</snippet>
